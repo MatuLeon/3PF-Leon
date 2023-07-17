@@ -1,0 +1,10 @@
+
+<div class="mb-5">
+    <button (click)="agregarAlumno()" mat-flat-button type="button" color="primary" >
+        <mat-icon>person_add</mat-icon>
+        Crear Alumno/a 
+    </button>
+
+</div>
+
+    <app-user-table [dataSource]="alumnos"></app-user-table>
