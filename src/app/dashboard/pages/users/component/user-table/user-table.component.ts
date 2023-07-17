@@ -10,7 +10,7 @@ import { Alumnos } from '../../model';
   styleUrls: ['./user-table.component.scss']
 })
 export class UserTableComponent {
-  displayedColumns: string[] = ['name', 'lastname', 'email', 'password'];
+  displayedColumns: string[] = ['fullName','nota', 'email', 'password', ];
 
   @Input()
   dataSource: Alumnos[] = [];

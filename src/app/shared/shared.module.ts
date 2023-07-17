@@ -8,6 +8,11 @@ import { MatDialogModule} from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTableModule } from '@angular/material/table';
+import { FullNamePipe } from './pipes/full-name.pipe';
+import { ErrorMessagesPipe } from './pipes/error-messages.pipe';
+import { ResaltadoDirective } from './directives/resaltado.directive';
+import { RepetirDirective } from './directives/repetir.directive';
+import { ResaltarNotaDirective } from './directives/resaltar-nota.directive';
 
 
 
@@ -15,7 +20,13 @@ import { MatTableModule } from '@angular/material/table';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    FullNamePipe,
+    ErrorMessagesPipe,
+    ResaltadoDirective,
+    RepetirDirective,
+    ResaltarNotaDirective
+  ],
   imports: [
     CommonModule
   ],
@@ -27,7 +38,12 @@ import { MatTableModule } from '@angular/material/table';
     ReactiveFormsModule,
     MatInputModule,
     MatFormFieldModule,
-    MatTableModule
+    MatTableModule,
+    FullNamePipe,
+    ErrorMessagesPipe,
+    ResaltadoDirective,
+    RepetirDirective,
+    ResaltarNotaDirective
   ]
 })
 export class SharedModule { }

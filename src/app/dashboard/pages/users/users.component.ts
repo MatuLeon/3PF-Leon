@@ -4,10 +4,17 @@ import { UserFormDialogComponent } from './component/user-form-dialog/user-form-
 import { Alumnos } from './model';
 
 const ELEMENT_DATA: Alumnos[] = [{
-  name : 'Carlita',
+  name : 'Carla',
   lastname : 'Fernandez',
   email : 'carf@mail.com',
-  password : '231231'
+  password : '231231',
+  nota : '7'
+},{
+  name: 'Matias',
+  lastname: 'Leon',
+  email: 'mat@hotmail.com',
+  password: '2929292',
+  nota : '9'
 }
 ];
 
@@ -41,7 +48,8 @@ export class UsersComponent {
                 name : v.name,
                 lastname: v.lastname,
                 email : v.email,
-                password: v.password
+                password: v.password,
+                nota : v.nota,
               }
             ]
           }else console.log ('Cancelado')

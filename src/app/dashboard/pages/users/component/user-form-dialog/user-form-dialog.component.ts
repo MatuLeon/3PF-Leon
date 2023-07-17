@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
 import { FormControl, 
   FormGroup, 
-  Validators, 
-  ValidationErrors, 
-  ValidatorFn, 
-  AbstractControl} from '@angular/forms'
+  Validators,
+} from '@angular/forms'
 import { MatDialogRef } from '@angular/material/dialog';
 
 
@@ -16,15 +14,19 @@ import { MatDialogRef } from '@angular/material/dialog';
 export class UserFormDialogComponent {
   nameControl = new FormControl(null, [
     Validators.required,
-    this.noNumber()
+    // this.noNumber()
   ]);
   lastNameControl = new FormControl(null, [
     Validators.required
   ]);
   emailControl = new FormControl(null, [
-    Validators.required
+    Validators.required,
+    Validators.email
   ]);
   passwordControl = new FormControl(null, [
+    Validators.required
+  ]);
+  notaControl = new FormControl(null, [
     Validators.required
   ]);
 
@@ -33,21 +35,22 @@ export class UserFormDialogComponent {
     lastname : this.lastNameControl,
     email : this.emailControl,
     password : this.passwordControl,
+    nota : this.notaControl,
   })
   
-  noNumber(): ValidatorFn{
-    return (control : AbstractControl): ValidationErrors | null =>{
-      if (control instanceof FormControl){
-        if (control.value?.includes('asd')){
-          return{
-            noNumber: true
-          }
-        }
-      }
+  // noNumber(): ValidatorFn{
+  //   return (control : AbstractControl): ValidationErrors | null =>{
+  //     if (control instanceof FormControl){
+  //       if (control.value?.includes(/^[0-9]$/)){
+  //         return{
+  //           noNumber: true
+  //         }
+  //       }
+  //     }
 
-      return null
-    }
-  }
+  //     return null
+  //   }
+  // }
 
     constructor(private dialogRef: MatDialogRef <UserFormDialogComponent>){}
 
