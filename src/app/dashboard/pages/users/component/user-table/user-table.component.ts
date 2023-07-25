@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Alumnos } from '../../model';
 
 
@@ -10,8 +10,16 @@ import { Alumnos } from '../../model';
   styleUrls: ['./user-table.component.scss']
 })
 export class UserTableComponent {
-  displayedColumns: string[] = ['fullName','nota', 'email', 'password', ];
+  displayedColumns: string[] = [ 'id','fullName','nota', 'email', 'password', 'actions' ];
 
   @Input()
   dataSource: Alumnos[] = [];
+
+  @Output()
+  deleteAlumno = new EventEmitter<Alumnos>();
+
+  @Output()
+  editAlumno = new EventEmitter<Alumnos>();
+
+
 }

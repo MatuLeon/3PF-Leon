@@ -1,4 +1,19 @@
-<app-user-table [dataSource]="alumnos"></app-user-table>
+<p>{{ loading ? '...Cargando' : ''}}</p>
+
+<div *ngIf="!loading">
+
+    {{ numeros}}
+    <br>
+    {{ nombres}}
+</div>
+
+
+<app-user-table 
+    [dataSource]="(alumnos | async) || []" 
+    (deleteAlumno)="onDeleteAlumno($event)" 
+    (editAlumno)="onEditAlumno($event)"
+    >
+</app-user-table>
 
 
 <div class="mt-5 flex justify-content-end">
