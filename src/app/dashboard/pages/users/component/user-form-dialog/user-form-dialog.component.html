@@ -1,4 +1,10 @@
-<h1 matDialogTitle>Completar con sus datos</h1>
+<h1 matDialogTitle>
+    {{
+        editingAlumno
+            ? 'Editando a ' + editingAlumno.name + " " + editingAlumno.lastname
+            : "Crear alumno"
+    }}
+</h1>
 <div matDialogContent>
     <form  [formGroup]="userForm"  action="" class="grid">
 
@@ -11,7 +17,6 @@
                 <mat-error *ngFor="let error of nameControl.errors | keyvalue">
                     {{error | errorMessages}}
                 </mat-error>
-                <!-- <mat-error *ngIf="nameControl.hasError('noNumber')">No se permiten números</mat-error> -->
     
             </mat-form-field>  
         </div>

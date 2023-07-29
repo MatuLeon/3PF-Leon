@@ -14,11 +14,11 @@ import { Alumnos } from '../../model';
 })
 export class UserFormDialogComponent {
 
-  idControl = new FormControl<number | null>(null,)
+  editingAlumno?: Alumnos;
 
+  idControl = new FormControl<number | null>(null,)
   nameControl = new FormControl<string | null>(null, [
     Validators.required,
-    // this.noNumber()
   ]);
   lastNameControl = new FormControl<string | null>(null, [
     Validators.required
@@ -43,26 +43,13 @@ export class UserFormDialogComponent {
     nota : this.notaControl,
   })
   
-  // noNumber(): ValidatorFn{
-  //   return (control : AbstractControl): ValidationErrors | null =>{
-  //     if (control instanceof FormControl){
-  //       if (control.value?.includes(/^[0-9]$/)){
-  //         return{
-  //           noNumber: true
-  //         }
-  //       }
-  //     }
-
-  //     return null
-  //   }
-  // }
-
     constructor(
       private dialogRef: MatDialogRef <UserFormDialogComponent>,
         @Inject(MAT_DIALOG_DATA) private data?: Alumnos
       ){
         if (this.data){
-          this.idControl.setValue(this.data.id)
+          this.editingAlumno = this.data;
+          this.idControl.setValue(this.data.id);
           this.nameControl.setValue(this.data.name);
           this.lastNameControl.setValue(this.data.lastname);
           this.emailControl.setValue(this.data.email);
