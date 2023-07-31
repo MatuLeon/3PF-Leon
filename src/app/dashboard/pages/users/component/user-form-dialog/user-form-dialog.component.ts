@@ -1,8 +1,5 @@
-import { Component, Inject, inject } from '@angular/core';
-import { FormControl, 
-  FormGroup, 
-  Validators,
-} from '@angular/forms'
+import { Component, Inject } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Alumnos } from '../../model';
 
@@ -30,7 +27,7 @@ export class UserFormDialogComponent {
   passwordControl = new FormControl<string | null>(null, [
     Validators.required
   ]);
-  notaControl = new FormControl<string | null>(null, [
+  cursoControl = new FormControl<string | null>(null, [
     Validators.required
   ]);
 
@@ -40,7 +37,7 @@ export class UserFormDialogComponent {
     lastname : this.lastNameControl,
     email : this.emailControl,
     password : this.passwordControl,
-    nota : this.notaControl,
+    curso : this.cursoControl,
   })
   
     constructor(
@@ -53,7 +50,7 @@ export class UserFormDialogComponent {
           this.nameControl.setValue(this.data.name);
           this.lastNameControl.setValue(this.data.lastname);
           this.emailControl.setValue(this.data.email);
-          this.notaControl.setValue(this.data.nota);
+          this.cursoControl.setValue(this.data.curso);
           this.passwordControl.setValue(this.data.password)
 
         }

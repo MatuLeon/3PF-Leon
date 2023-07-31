@@ -17,11 +17,6 @@ import { Observable} from 'rxjs';
 export class UsersComponent {
 
   public alumnos : Observable<Alumnos[]>;
-  public loading = false;
-  public nombres: string[] = [];
-  public numeros: number[] = [];
-
-
 
   constructor(
     private matDialog: MatDialog,
@@ -53,7 +48,7 @@ export class UsersComponent {
               lastname : v.lastname,
               email: v.email,
               password: v.password,
-              nota : v.nota,
+              curso : v.nota,
             });
         }
       }})

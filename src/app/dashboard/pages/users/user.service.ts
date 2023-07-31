@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Alumnos, CreateAlumnoData, UpdateAlumnoData } from './model';
-import { BehaviorSubject, Observable, Subject, delay, of, take} from 'rxjs';
+import { BehaviorSubject, Observable, Subject, delay, map, of, take} from 'rxjs';
 import { NotifierService } from 'src/app/core/services/notifier.service';
 
 
@@ -11,7 +11,7 @@ const alumno_DB : Observable<Alumnos[]> = of([
     lastname : 'Fernandez',
     email : 'carf@mail.com',
     password : '231231',
-    nota : '7'
+    curso : 'Angular'
   },
   {
     id : 2,
@@ -19,7 +19,7 @@ const alumno_DB : Observable<Alumnos[]> = of([
     lastname: 'Leon',
     email: 'mat@hotmail.com',
     password: '2929292',
-    nota : '9'
+    curso : 'Desarrollo Web'
   },
   {
     id : 3,
@@ -27,7 +27,7 @@ const alumno_DB : Observable<Alumnos[]> = of([
     lastname: 'Sanueza',
     email: 'migue@hotmail.com',
     password: '2556292',
-    nota : '3'
+    curso : 'Aprendiendo a aprender'
   },
   {
     id : 4,
@@ -35,7 +35,7 @@ const alumno_DB : Observable<Alumnos[]> = of([
     lastname: 'Ortiz',
     email: 'ortizDavid@hotmail.com',
     password: '468555',
-    nota : '5'
+    curso : 'Ingles inicial'
   },
   {
     id : 5,
@@ -43,7 +43,7 @@ const alumno_DB : Observable<Alumnos[]> = of([
     lastname: 'Gomez',
     email: 'daniGo@hotmail.com',
     password: '125239',
-    nota : '8'
+    curso : 'Java inicial'
   }
 ]).pipe(delay(1500))
 
@@ -105,6 +105,13 @@ export class UserService {
         );
       }
     })
+  }
+
+  getAlumnoByID ( id : number): Observable <Alumnos|undefined>{
+    return this.alumnos$.pipe(
+      map((alum)=> alum.find((u) => u.id === id)),
+      take(1)
+    )
   }
 
   deleteAlumnoById( id: number):void{

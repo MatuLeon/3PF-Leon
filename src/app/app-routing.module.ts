@@ -7,6 +7,7 @@ import { UsersComponent } from './dashboard/pages/users/users.component';
 import { AlumnosDetailComponent} from './dashboard/pages/users/pages/users-detail/users-detail.component';
 import { LoginComponent } from './auth/pages/login/login.component';
 import { RegisterComponent } from './auth/pages/register/register.component';
+import { CursosComponent } from './dashboard/pages/cursos/cursos.component';
 
 const routes: Routes = [
   {
@@ -24,6 +25,10 @@ const routes: Routes = [
       {
         path: 'users/:id',
         component: AlumnosDetailComponent
+      },
+      {
+        path: 'cursos',
+        component: CursosComponent
       },
       {
         path : '**',

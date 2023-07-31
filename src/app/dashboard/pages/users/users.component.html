@@ -1,12 +1,3 @@
-<p>{{ loading ? '...Cargando' : ''}}</p>
-
-<div *ngIf="!loading">
-
-    {{ numeros}}
-    <br>
-    {{ nombres}}
-</div>
-
 
 <app-user-table 
     [dataSource]="(alumnos | async) || []" 
