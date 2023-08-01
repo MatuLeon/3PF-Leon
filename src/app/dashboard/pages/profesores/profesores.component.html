@@ -1,34 +1,34 @@
-<h1>Estos son los cursos que tenemos</h1>
+<h1>Conoce a nuestros profesores</h1>
 <br>
-<p>Encuentra lo que buscas y potencia tu carrera</p>
+<p>Estos profesores seran quienes te acompañen a lo largo del curso que elijas</p>
 
-<table mat-table [dataSource]="(data$ | async )|| []" class="mat-elevation-z8">
+<table mat-table [dataSource]="(data$ |async) || []" class="mat-elevation-z8">
 
     <!-- ID -->
     <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef appResaltado="#5C9EAD"> ID </th>
-        <td mat-cell *matCellDef="let curso"> {{curso.id}} </td>
+        <td mat-cell *matCellDef="let profesor"> {{profesor.id}} </td>
     </ng-container>
 
     <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef appResaltado="#5C9EAD"> Nombre </th>
-        <td mat-cell *matCellDef="let curso"> {{curso.name}} </td>
+        <td mat-cell *matCellDef="let profesor"> {{profesor.name}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="description">
+    <ng-container matColumnDef="materia">
         <th mat-header-cell *matHeaderCellDef appResaltado="#5C9EAD"> Descripción </th>
-        <td mat-cell *matCellDef="let curso"> {{curso.description}} </td>
+        <td mat-cell *matCellDef="let profesor"> {{profesor.materia}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="price">
-        <th mat-header-cell *matHeaderCellDef appResaltado="#5C9EAD">Precio </th>
-        <td mat-cell *matCellDef="let curso"> {{curso.price|currency}} </td>
+    <ng-container matColumnDef="titulo">
+        <th mat-header-cell *matHeaderCellDef appResaltado="#5C9EAD">Titulo </th>
+        <td mat-cell *matCellDef="let profesor"> {{profesor.titulo}} </td>
     </ng-container>
 
     <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef appResaltado="#5C9EAD">Acciones </th>
-        <td mat-cell *matCellDef="let curso">
-            <button (click)="onDelete(curso.id)" mat-icon-button color="warn">
+        <td mat-cell *matCellDef="let profesor">
+            <button (click)="onDelete(profesor.id)" mat-icon-button color="warn">
                 <mat-icon>
                     delete
                 </mat-icon>
@@ -43,9 +43,9 @@
 
 
 <div class="mt-5 flex justify-content-end">
-    <button (click)="agregarCurso()" mat-flat-button color="primary" type="button">
+    <button (click)="agregarProfe()" mat-flat-button color="primary" type="button">
         <mat-icon>add</mat-icon>
-        Agregar Curso
+        Agregar Profesor
     </button>
 
 </div>

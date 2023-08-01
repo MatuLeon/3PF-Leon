@@ -1,12 +1,12 @@
-export interface Cursos {
-    id : number;
-    name: string;
+export interface CursosData{
+    id: number,
+    name: string,
     description: string,
-    price : number,
+    price: number
 }
 
-export interface createCursoData{
-    name: string;
+export interface CreateCursoData{
+    name: string,
     description: string,
-    price : number,
+    price: number
 }

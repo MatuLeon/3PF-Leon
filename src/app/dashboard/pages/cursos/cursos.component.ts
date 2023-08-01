@@ -1,68 +1,62 @@
-import { Component} from '@angular/core';
-import { Observable} from 'rxjs';
-import { Cursos } from './model';
-import { MatDialog } from '@angular/material/dialog';
+import { Component, OnInit } from '@angular/core';
+import { CursosData } from './model';
 import { CursosService } from './cursos.service';
-import { NotifierService } from 'src/app/core/services/notifier.service';
-import { UserFormDialogComponent } from '../users/component/user-form-dialog/user-form-dialog.component';
+import { Observable } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { CursosFormDialogComponent } from './cursos-form-dialog/cursos-form-dialog/cursos-form-dialog.component';
+
 
 @Component({
   selector: 'app-cursos',
   templateUrl: './cursos.component.html',
 })
-export class CursosComponent{
-  // public dataSource: Cursos[] = [];
-  // public displayedColumns = ['id', 'name' , 'description', 'price', 'actions'];
-  // public data$ : Observable<Cursos[]>;
+export class CursosComponent implements OnInit{
 
-  // constructor(private cursoService : CursosService){
-  //   this.data$ = this.cursoService.getCursos()
-  // }
-  
-  // ngOnInit(): void{
-  //   this.cursoService.loadCursos()
+  // public dataSource: CursosData[] = [];
 
-  //   this.cursoService.getCursos().subscribe({
-  //     next: (data)=> console.log(data)
-  //   })
-  // }
+  public data$: Observable<CursosData[]>;
 
-  // onCreate(): void{
-  //   this.cursoService.createCurso()
-  // }
+  public displayedColumns = ['id', 'name', 'description', 'price', 'actions']
 
-  // onDelete(id: number):void{
-  //   this.cursoService.deleteById(id)
-  // }
-
-  public curso: Observable<Cursos[]>;
-
-  constructor(
-    private matDialog: MatDialog,
-    private cursoService : CursosService,
-    private notifier: NotifierService,
+  constructor
+  (private cursoService: CursosService, 
+  private matDialog: MatDialog
   )
+    
+    {
+    this.data$ = this.cursoService.getCursos()
+  }
 
-  {
-    this.curso = this.cursoService.getCursos()
+  ngOnInit(): void {
+    this.cursoService.loadCursos();
 
-    this.cursoService.loadCursos()
+    // this.cursoService.getCursos().subscribe({
+    //   next: (data) => console.log('DATA: ' , data)
+    // });
+
+
+  }
+  
+  onCreate():void{
+    this.matDialog.open(CursosFormDialogComponent)
+  }
+
+  onDelete(id: number):void{
+    this.cursoService.deleteById(id)
   }
 
   agregarCurso():void{
-    this.matDialog
-    .open(UserFormDialogComponent)
+    this.matDialog.open(CursosFormDialogComponent)
     .afterClosed()
     .subscribe({
-      next:(c)=>{
-        if(c){
-          this.notifier.showSucces('RegistroExitoso')
+      next: (v) =>{
+        if(v){
           this.cursoService.createCurso({
-            name : c.name,
-            description: c.description,
-            price: c.price
+            name: v.name,
+            description: v.description,
+            price: v.price,
           })
-        }
+        }else console.log('Se cancelo')
       }
     })
   }

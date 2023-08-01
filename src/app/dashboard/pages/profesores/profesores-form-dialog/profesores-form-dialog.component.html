@@ -2,14 +2,14 @@
 
 <h1 matDialogTitle>
     {{
-        editingCurso
-        ? 'Editando a ' + editingCurso.name
+        editingProfe
+        ? 'Editando a ' + editingProfe.name
         : 'Crear Curso'
     }}
 </h1>
 
 <div matDialogContent>
-    <form [formGroup]="cursoForm" action="" class="grid">
+    <form [formGroup]="profeForm" action="" class="grid">
 
         <div class="col-6 field">
             <mat-form-field>
@@ -23,18 +23,18 @@
 
         <div class="col-6 field">
             <mat-form-field>
-                <mat-label>Descripción</mat-label>
-                <input formControlName="description" matInput type="text" name="description">
-                <mat-error *ngFor="let error of descriptionControl.errors | keyvalue">
+                <mat-label>Titulo</mat-label>
+                <input formControlName="titulo" matInput type="text" name="titulo">
+                <mat-error *ngFor="let error of tituloControl.errors | keyvalue">
                     {{error | errorMessages}}
                 </mat-error>
             </mat-form-field>
         </div>
         <div class="col-6 field">
             <mat-form-field>
-                <mat-label>Precio</mat-label>
-                <input formControlName="price" matInput type="text" name="price">
-                <mat-error *ngFor="let error of priceControl.errors | keyvalue">
+                <mat-label>Materia</mat-label>
+                <input formControlName="materia" matInput type="text" name="materia">
+                <mat-error *ngFor="let error of materiaControl.errors | keyvalue">
                     {{error | errorMessages}}
                 </mat-error>
             </mat-form-field>
@@ -44,5 +44,5 @@
 
 <div class="flex justify-content-end" matDialogActions>
     <button mat-button mat-dialog-close>Cancelar</button>
-    <button (click)="onSubmitCurso()" type="button" mat-button>Guardar</button>
+    <button (click)="onSubmitProfe()" type="button" mat-button>Guardar</button>
 </div>

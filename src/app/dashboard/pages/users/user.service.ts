@@ -52,7 +52,6 @@ const alumno_DB : Observable<Alumnos[]> = of([
 })
 export class UserService {
 
-  private alumnos : Alumnos[]=[]
 
   private sendNotification$ = new Subject<string>();
 

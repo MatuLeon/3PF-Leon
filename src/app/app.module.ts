@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { AuthModule } from './auth/auth.module';
 import { CursosModule } from './dashboard/pages/cursos/cursos.module';
+import { ProfesoresModule } from './dashboard/pages/profesores/profesores.module';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { CursosModule } from './dashboard/pages/cursos/cursos.module';
     DashboardModule,
     AuthModule,
     CursosModule,
+    ProfesoresModule
   ],
   providers: [],
   bootstrap: [AppComponent]

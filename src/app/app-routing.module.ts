@@ -8,6 +8,7 @@ import { AlumnosDetailComponent} from './dashboard/pages/users/pages/users-detai
 import { LoginComponent } from './auth/pages/login/login.component';
 import { RegisterComponent } from './auth/pages/register/register.component';
 import { CursosComponent } from './dashboard/pages/cursos/cursos.component';
+import { ProfesoresComponent } from './dashboard/pages/profesores/profesores.component';
 
 const routes: Routes = [
   {
@@ -29,6 +30,10 @@ const routes: Routes = [
       {
         path: 'cursos',
         component: CursosComponent
+      },
+      {
+        path: 'profesores',
+        component: ProfesoresComponent
       },
       {
         path : '**',

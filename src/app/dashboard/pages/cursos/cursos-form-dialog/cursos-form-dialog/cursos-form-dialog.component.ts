@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { Cursos } from '../../model';
+import { CursosData } from '../../model';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
@@ -9,36 +9,38 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./cursos-form-dialog.component.scss']
 })
 export class CursosFormDialogComponent {
-  editingCurso? : Cursos;
 
-  idControl = new FormControl <number | null>(null, [ Validators.required])
-  nameControl = new FormControl <string | null> (null, [ Validators.required])
-  descriptionControl = new FormControl <string | null>(null, [Validators.required])
-  priceControl = new FormControl <number|null> (null,[ Validators.required])
+  editingCurso? : CursosData;
+
+
+  idControl = new FormControl<number | null>(null);
+  nameControl = new FormControl <string | null>(null, [Validators.required]);
+  descriptionControl = new FormControl <string | null> (null, [Validators.required]);
+  priceControl = new FormControl <number|null> (null,[Validators.required, Validators.pattern((/^[1-9]\d{6,10}$/))]);
 
   cursoForm = new FormGroup({
     id : this.idControl,
-    name: this.nameControl,
-    description: this.descriptionControl,
-    price: this.priceControl
+    name : this.nameControl,
+    description : this.descriptionControl,
+    price : this.priceControl,
   })
 
   constructor(
     private dialogRef: MatDialogRef<CursosFormDialogComponent>,
-    @Inject (MAT_DIALOG_DATA) private data?: Cursos
-    ){
-      if(this.data){
-        this.editingCurso = this.data;
-        this.idControl.setValue(this.data.id);
-        this.nameControl.setValue(this.data.name);
-        this.descriptionControl.setValue(this.data.description);
-        this.priceControl.setValue(this.data.price);
-      }
+    @Inject(MAT_DIALOG_DATA) private data?: CursosData
+  ){
+    if(this.data){
+      this.editingCurso = this.data;
+      this.idControl.setValue(this.data.id);
+      this.nameControl.setValue(this.data.name);
+      this.descriptionControl.setValue(this.data.description);
+      this.priceControl.setValue(this.data.price);
     }
+  }
 
-    onSubmit():void{
-      if(this.cursoForm.invalid){
-        this.cursoForm.markAllAsTouched()
-      }else this.dialogRef.close(this.cursoForm.value)
-    }
+  onSubmitCurso(): void{
+    if(this.cursoForm.invalid){
+      this.cursoForm.markAllAsTouched()
+    }else this.dialogRef.close(this.cursoForm.value)
+  }
 }

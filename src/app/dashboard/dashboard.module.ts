@@ -28,7 +28,7 @@ import { ToolbarComponent } from './layout/toolbar/toolbar.component';
     MatToolbarModule,
     SharedModule,
     RouterModule,
-    MatListModule
+    MatListModule,
   ],
   exports:[
     DashboardComponent
