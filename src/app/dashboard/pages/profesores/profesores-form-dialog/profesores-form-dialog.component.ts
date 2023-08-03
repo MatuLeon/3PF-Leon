@@ -6,7 +6,6 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 @Component({
   selector: 'app-profesores-form-dialog',
   templateUrl: './profesores-form-dialog.component.html',
-  styleUrls: ['./profesores-form-dialog.component.scss']
 })
 export class ProfesoresFormDialogComponent {
 

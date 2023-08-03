@@ -8,7 +8,6 @@ import { ProfesoresFormDialogComponent } from './profesores-form-dialog/profesor
 @Component({
   selector: 'app-profesores',
   templateUrl: './profesores.component.html',
-  styleUrls: ['./profesores.component.scss']
 })
 export class ProfesoresComponent implements OnInit{
   
