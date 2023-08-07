@@ -16,7 +16,8 @@ import { RegisterComponent } from "./pages/register/register.component";
                 component: RegisterComponent,
             }
         ])
-    ]
+    ],
+    exports: [RouterModule]
 })
 
 export class AuthRoutingModule{}

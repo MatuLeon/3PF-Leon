@@ -11,8 +11,6 @@ import { AlumnosDetailComponent } from './pages/users-detail/users-detail.compon
   imports: [
     CommonModule,
     RouterModule.forChild([
-      {
-        children:[
           {
               path :'',
               component: UsersComponent,
@@ -21,8 +19,6 @@ import { AlumnosDetailComponent } from './pages/users-detail/users-detail.compon
               path:':id',
               component: AlumnosDetailComponent
           }
-      ]
-      }
     ])
   ],
   exports:[RouterModule]

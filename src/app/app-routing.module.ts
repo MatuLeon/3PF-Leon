@@ -6,20 +6,18 @@ import { AuthComponent } from './auth/auth.component';
 
 const routes: Routes = [
   {
-    path: 'dashboard', 
+    path: 'dashboard',
     component: DashboardComponent,
-    loadChildren: ()=> import('./dashboard/dashboard.module')
-    .then((m)=> m.DashboardModule)
+    loadChildren: ()=>import('./dashboard/dashboard.module').then((m)=>m.DashboardModule)
   },
   {
     path: 'auth',
     component: AuthComponent,
-    loadChildren: ()=>import('./auth/auth.module').
-    then((m)=>m.AuthModule)
+    loadChildren: ()=>import('./auth/auth.module').then((m)=>m.AuthModule)
   },
   {
-    path : '**',
-    redirectTo: '/auth/login'
+    path: '**',
+    redirectTo: './auth/login'
   }
   
 ];

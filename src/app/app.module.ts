@@ -15,7 +15,7 @@ import { ProfesoresModule } from './dashboard/pages/profesores/profesores.module
     AppRoutingModule,
     BrowserAnimationsModule,
     CursosModule,
-    ProfesoresModule
+    ProfesoresModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

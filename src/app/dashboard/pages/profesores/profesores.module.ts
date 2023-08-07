@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ProfesoresComponent } from './profesores.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ProfesoresFormDialogComponent } from './profesores-form-dialog/profesores-form-dialog.component';
+import { ProfesorRoutingModule } from './profesores-routing.module';
 
 
 
@@ -13,7 +14,8 @@ import { ProfesoresFormDialogComponent } from './profesores-form-dialog/profesor
   ],
   imports: [
     CommonModule,
-    SharedModule
+    SharedModule,
+    ProfesorRoutingModule
   ]
 })
 export class ProfesoresModule { }
