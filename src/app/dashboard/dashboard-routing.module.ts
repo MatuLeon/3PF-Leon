@@ -1,13 +1,14 @@
 import { NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
 import { ProfesoresModule } from "./pages/profesores/profesores.module";
+import { HomeComponent } from "./pages/home/home.component";
 
 
 @NgModule({
     imports: [RouterModule.forChild([
         {
             path: 'home',
-            loadChildren: ()=> import('./pages/home/home.module').then((m)=>m.HomeModule),
+            component: HomeComponent
         },
         {
             path: 'users',
@@ -20,6 +21,10 @@ import { ProfesoresModule } from "./pages/profesores/profesores.module";
         {
             path: 'profesores',
             loadChildren: ()=>import('./pages/profesores/profesores.module').then((m)=>ProfesoresModule)
+        },
+        {
+            path: '**',
+            redirectTo: 'home',
         }
     ])],
     exports: [RouterModule]

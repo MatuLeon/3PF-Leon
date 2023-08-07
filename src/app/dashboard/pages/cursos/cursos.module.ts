@@ -6,6 +6,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { CursosFormDialogComponent } from './cursos-form-dialog/cursos-form-dialog/cursos-form-dialog.component';
 
 
+
 @NgModule({
   declarations: [
     CursosComponent,
@@ -13,8 +14,8 @@ import { CursosFormDialogComponent } from './cursos-form-dialog/cursos-form-dial
   ],
   imports: [
     CommonModule,
+    SharedModule,
     CursosRoutingModule,
-    SharedModule
   ]
 })
 export class CursosModule { }

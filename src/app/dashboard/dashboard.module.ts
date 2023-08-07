@@ -10,6 +10,8 @@ import { NavMenuComponent } from './layout/nav-menu/nav-menu.component';
 import { ToolbarComponent } from './layout/toolbar/toolbar.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { RouterModule } from '@angular/router';
+import { CursosModule } from './pages/cursos/cursos.module';
+import { HomeModule } from './pages/home/home.module';
 
 
 
@@ -30,6 +32,8 @@ import { RouterModule } from '@angular/router';
     DashboardRoutingModule,
     SharedModule,
     MatListModule,
+    CursosModule,
+    HomeModule
   ],
   exports:[
     DashboardComponent,

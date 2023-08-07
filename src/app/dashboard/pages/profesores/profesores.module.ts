@@ -15,7 +15,7 @@ import { ProfesorRoutingModule } from './profesores-routing.module';
   imports: [
     CommonModule,
     SharedModule,
-    ProfesorRoutingModule
+    ProfesorRoutingModule,
   ]
 })
 export class ProfesoresModule { }
