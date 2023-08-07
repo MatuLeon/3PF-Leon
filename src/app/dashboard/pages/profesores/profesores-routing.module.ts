@@ -4,7 +4,7 @@ import { ProfesoresComponent } from './profesores.component';
 
 const routes : Routes = [
     {
-        path: '',
+        path: '**',
         component: ProfesoresComponent
     }
 ]

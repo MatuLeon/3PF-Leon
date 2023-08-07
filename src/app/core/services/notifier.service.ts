@@ -14,9 +14,6 @@ interface MyCustomNotification{
   providedIn: 'root'
 })
 export class NotifierService {
-  showError(arg0: string) {
-    throw new Error('Method not implemented.');
-  }
 
   private notifier$ = new Subject <MyCustomNotification>()
 
@@ -36,5 +33,13 @@ export class NotifierService {
         title
       })
     }
+    
+    showError (message: string, title = 'Error'): void {
+      this.notifier$.next({
+        type: 'error',
+        message,
+        title
+      });
+    }
+  }
 
-}
