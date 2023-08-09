@@ -1,0 +1,14 @@
+{
+  "users": [
+    {
+        "name": "Matias",
+        "lastname": "Leon",
+        "email" : "ml@hotmail.com",
+        "curso": "Angular",
+        "password": "123",
+        "id": 1
+    }
+  ],
+  "cursos": [],
+  "profesores": []
+}

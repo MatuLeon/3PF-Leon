@@ -1,66 +1,22 @@
 import { Injectable } from '@angular/core';
 import { Alumnos, CreateAlumnoData, UpdateAlumnoData } from './model';
-import { BehaviorSubject, Observable, Subject, delay, map, of, take} from 'rxjs';
+import { BehaviorSubject, Observable, Subject, delay, map, mergeMap, of, take} from 'rxjs';
 import { NotifierService } from 'src/app/core/services/notifier.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
-const alumno_DB : Observable<Alumnos[]> = of([
-  {
-    id: 1,
-    name : 'Carla',
-    lastname : 'Fernandez',
-    email : 'carf@mail.com',
-    password : '231231',
-    curso : 'Angular'
-  },
-  {
-    id : 2,
-    name: 'Matias',
-    lastname: 'Leon',
-    email: 'mat@hotmail.com',
-    password: '2929292',
-    curso : 'Desarrollo Web'
-  },
-  {
-    id : 3,
-    name: 'Miguel',
-    lastname: 'Sanueza',
-    email: 'migue@hotmail.com',
-    password: '2556292',
-    curso : 'Aprendiendo a aprender'
-  },
-  {
-    id : 4,
-    name: 'David',
-    lastname: 'Ortiz',
-    email: 'ortizDavid@hotmail.com',
-    password: '468555',
-    curso : 'Ingles inicial'
-  },
-  {
-    id : 5,
-    name: 'Daniela',
-    lastname: 'Gomez',
-    email: 'daniGo@hotmail.com',
-    password: '125239',
-    curso : 'Java inicial'
-  }
-]).pipe(delay(1500))
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-
-
   private sendNotification$ = new Subject<string>();
-
   //Usar $ AL FINAL PARA SABER QUE ES UN OBSERVABLE
   private _alumnos$ = new BehaviorSubject<Alumnos[]>([]);
   private alumnos$ = this._alumnos$.asObservable()
 
 
-  constructor(private notifier : NotifierService) { 
+  constructor(private notifier : NotifierService, private httpCliente : HttpClient) { 
     this.sendNotification$.subscribe({
       next : (message) => alert(message)
     })
@@ -72,8 +28,23 @@ export class UserService {
 
   
   loadAlumnos(): void{
-    alumno_DB.subscribe({
-      next: (alumnosFromDB) => this._alumnos$.next(alumnosFromDB)
+    // alumno_DB.subscribe({
+    //   next: (alumnosFromDB) => this._alumnos$.next(alumnosFromDB)
+    // })
+    this.httpCliente.get<Alumnos[]>('http://localhost:3000/users',{
+      headers: new HttpHeaders({
+        'token': '123'
+      })
+    }
+    
+    )
+    .subscribe({
+      next: (response) => {
+        this._alumnos$.next(response)
+      },
+      error: ()=>{
+        this.notifier.showError('Error al cargar los usuarios')
+      }
     })
   }
 
@@ -83,26 +54,45 @@ export class UserService {
   }
 
   createAlumno(alumno : CreateAlumnoData):void {
-    this._alumnos$.pipe(take(1)).subscribe({
-      next: (alumnosActuales)=>{
-        this._alumnos$.next 
-        ([...alumnosActuales,
-          {
-          ...alumno, id : alumnosActuales.length + 1}
-        ]);
-        this.notifier.showSucces('Alumno guardado correctamente')
+    // this._alumnos$.pipe(take(1)).subscribe({
+    //   next: (alumnosActuales)=>{
+    //     this._alumnos$.next 
+    //     ([...alumnosActuales,
+    //       {
+    //       ...alumno, id : alumnosActuales.length + 1}
+    //     ]);
+    //     this.notifier.showSucces('Alumno guardado correctamente')
+    //   }
+    // })
+    this.httpCliente.post<Alumnos>('http://localhost:3000/users', alumno)
+    .pipe(
+      mergeMap((alumnoCreate)=>
+        this.alumnos$.pipe(take(1), 
+        map(
+          (arrayActual)=> [...arrayActual, alumnoCreate])
+        )
+      )
+    )
+    .subscribe({
+      next: (arrayActualizado) =>{
+        this._alumnos$.next(arrayActualizado);
       }
     })
   }
 
 
   updateAlumnoByID (id: number, alumnoActualizado : UpdateAlumnoData):void{
-    this.alumnos$.pipe(take(1)).subscribe({
-      next: (idActual) =>{
-        this._alumnos$.next(
-          idActual.map((a) => a.id === id ? {...a, ...alumnoActualizado} : a)
-        );
-      }
+    // this.alumnos$.pipe(take(1)).subscribe({
+    //   next: (idActual) =>{
+    //     this._alumnos$.next(
+    //       idActual.map((a) => a.id === id ? {...a, ...alumnoActualizado} : a)
+    //     );
+    //   }
+    // })
+
+    this.httpCliente.put('http://localhost:3000/users/' + id, alumnoActualizado)
+    .subscribe({
+      next: ()=>this.loadAlumnos()
     })
   }
 
@@ -114,10 +104,27 @@ export class UserService {
   }
 
   deleteAlumnoById( id: number):void{
-    this._alumnos$.subscribe({
-      next: (arrayActual) => {this._alumnos$.next(arrayActual.filter((a) => a.id !== id))
-      this.notifier.showSucces('Alumno eliminado')}
-    })
-  }
+    // this._alumnos$.subscribe({
+    //   next: (arrayActual) => {this._alumnos$.next(arrayActual.filter((a) => a.id !== id))
+    //   this.notifier.showSucces('Alumno eliminado')}
+    // })
 
+    
+    this.httpCliente.delete('http://localhost:3000/users/' + id )
+    .pipe(
+      mergeMap(
+        (responseAlumEliminado) => this.alumnos$.pipe
+          (take(1), map 
+            (
+              (arrayActual)=>arrayActual.filter((a) => a.id !== id)
+            )
+          )
+      )
+    ).subscribe({
+      next: (arrayActualizado) => this._alumnos$.next(arrayActualizado)
+    })
+
+    this.alumnos$.pipe(take(1))
+  }
+  
 }

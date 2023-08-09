@@ -15,6 +15,10 @@ import { AlumnosDetailComponent } from './pages/users-detail/users-detail.compon
               path :'',
               component: UsersComponent,
           },
+          {
+            path : 'users/:id',
+            component: AlumnosDetailComponent
+          }
     ])
   ],
   exports:[RouterModule]
