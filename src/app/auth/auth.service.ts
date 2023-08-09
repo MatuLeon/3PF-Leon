@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable, map, take } from "rxjs"
 import { Alumnos } from "../dashboard/pages/users/model";
 import { NotifierService } from "../core/services/notifier.service";
 import { Router } from "@angular/router";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 
 @Injectable({providedIn: 'root'})
 
@@ -21,9 +21,19 @@ export class AuthService{
 
 
     isAuthenticated(): Observable<boolean>{
-        return this.authAlumno$.pipe(
-            take(1),
-            map((alumno) => alumno ? true : false))
+        // return this.authAlumno$.pipe(
+        //     take(1),
+        //     map((alumno) => alumno ? true : false))
+
+        return this.httpCliente.get<Alumnos[]>('http://localhost:3000/users', {
+            params: {
+                token: localStorage.getItem('token') || ''
+            }
+        }).pipe(
+            map((alumResult) => {
+                return !!alumResult.length
+            })
+        )
     }
 
 
@@ -54,11 +64,20 @@ export class AuthService{
         }).subscribe({
             next: (response)=>{
                 if(response.length){
-                    this._authAlumno$.next(response[0]);
-                    this.router.navigate(['/dashboard'])
+                    const authAlum = response[0]
+                    this._authAlumno$.next(authAlum);
+                    this.router.navigate(['/dashboard']);
+                    localStorage.setItem('token', authAlum.token)
                 }else{
                     this.notifier.showError('Email o contraseña invalidas');
                     this._authAlumno$.next(null)
+                }
+            },
+            error: (err)=>{
+                if (err instanceof HttpErrorResponse){
+                    if (err.status === 500){
+                        this.notifier.showError('')
+                    }
                 }
             }
         })

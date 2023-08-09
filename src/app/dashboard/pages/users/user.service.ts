@@ -3,7 +3,8 @@ import { Alumnos, CreateAlumnoData, UpdateAlumnoData } from './model';
 import { BehaviorSubject, Observable, Subject, delay, map, mergeMap, of, take} from 'rxjs';
 import { NotifierService } from 'src/app/core/services/notifier.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
+import { generateRandomString } from 'src/app/shared/utils/helpers';
+import { environment } from 'src/environments/environment.prod';
 
 
 @Injectable({
@@ -31,7 +32,7 @@ export class UserService {
     // alumno_DB.subscribe({
     //   next: (alumnosFromDB) => this._alumnos$.next(alumnosFromDB)
     // })
-    this.httpCliente.get<Alumnos[]>('http://localhost:3000/users',{
+    this.httpCliente.get<Alumnos[]>(environment.baseApiUrl + '/users',{
       headers: new HttpHeaders({
         'token': '123'
       })
@@ -64,7 +65,9 @@ export class UserService {
     //     this.notifier.showSucces('Alumno guardado correctamente')
     //   }
     // })
-    this.httpCliente.post<Alumnos>('http://localhost:3000/users', alumno)
+    const token = generateRandomString (20);
+
+    this.httpCliente.post<Alumnos>(environment.baseApiUrl + '/users', {...alumno, token})
     .pipe(
       mergeMap((alumnoCreate)=>
         this.alumnos$.pipe(take(1), 
@@ -90,7 +93,7 @@ export class UserService {
     //   }
     // })
 
-    this.httpCliente.put('http://localhost:3000/users/' + id, alumnoActualizado)
+    this.httpCliente.put(environment.baseApiUrl + '/users/' + id, alumnoActualizado)
     .subscribe({
       next: ()=>this.loadAlumnos()
     })
@@ -110,7 +113,7 @@ export class UserService {
     // })
 
     
-    this.httpCliente.delete('http://localhost:3000/users/' + id )
+    this.httpCliente.delete(environment.baseApiUrl + '/users/' + id )
     .pipe(
       mergeMap(
         (responseAlumEliminado) => this.alumnos$.pipe

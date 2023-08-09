@@ -4,7 +4,8 @@ export interface Alumnos {
     lastname : string,
     curso : string ,
     email : string,
-    password : string
+    password : string,
+    token: string
 }
 
 export interface CreateAlumnoData{
