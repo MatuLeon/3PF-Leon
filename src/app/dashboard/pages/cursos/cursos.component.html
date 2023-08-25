@@ -2,37 +2,41 @@
 <br>
 <p>Encuentra lo que buscas y potencia tu carrera</p>
 
-<table mat-table [dataSource]="(data$ | async )|| []" class="mat-elevation-z8">
+<table mat-table [dataSource]="(cursos$ | async )|| []" class="mat-elevation-z8">
 
     <!-- ID -->
     <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef appResaltado="#5C9EAD"> ID </th>
-        <td mat-cell *matCellDef="let curso"> {{curso.id}} </td>
+        <td mat-cell *matCellDef="let cursos"> {{cursos.id}} </td>
     </ng-container>
 
     <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef appResaltado="#5C9EAD"> Nombre </th>
-        <td mat-cell *matCellDef="let curso"> {{curso.name}} </td>
+        <td mat-cell *matCellDef="let cursos"> {{cursos.name}} </td>
     </ng-container>
 
     <ng-container matColumnDef="description">
         <th mat-header-cell *matHeaderCellDef appResaltado="#5C9EAD"> Descripción </th>
-        <td mat-cell *matCellDef="let curso"> {{curso.description}} </td>
+        <td mat-cell *matCellDef="let cursos"> {{cursos.description}} </td>
     </ng-container>
 
     <ng-container matColumnDef="price">
         <th mat-header-cell *matHeaderCellDef appResaltado="#5C9EAD">Precio </th>
-        <td mat-cell *matCellDef="let curso"> {{curso.price|currency}} </td>
+        <td mat-cell *matCellDef="let cursos"> {{cursos.price|currency}} </td>
     </ng-container>
 
     <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef appResaltado="#5C9EAD">Acciones </th>
-        <td mat-cell *matCellDef="let curso">
-            <button (click)="onDelete(curso.id)" mat-icon-button color="warn">
+        <td mat-cell *matCellDef="let cursos">
+            <button (click)="onDelete(cursos.id)" mat-icon-button color="warn">
                 <mat-icon>
                     delete
                 </mat-icon>
             </button>
+            <button  mat-icon-button color="primary">
+                <mat-icon>edit</mat-icon>
+            </button>
+
         </td>
     </ng-container>
 
@@ -47,5 +51,6 @@
         <mat-icon>add</mat-icon>
         Agregar Curso
     </button>
+    
 
 </div>

@@ -10,6 +10,25 @@
         "id": 1
     }
   ],
-  "cursos": [],
+  "cursos": [
+    {
+      "id": 1,
+      "name": "Ingles inicial",
+      "description": "Aprende ingles hasta B1",
+      "price": 21
+  },
+  {
+      "id": 2,
+      "name": "Java inicial",
+      "description": "Programación backend",
+      "price": 448
+  },
+  {
+      "id": 3,
+      "name": "Angular",
+      "description": "Adentrate en el mundo de Angular",
+      "price": 655
+  }
+  ],
   "profesores": []
 }

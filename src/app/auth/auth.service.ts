@@ -5,25 +5,22 @@ import { Alumnos } from "../dashboard/pages/users/model";
 import { NotifierService } from "../core/services/notifier.service";
 import { Router } from "@angular/router";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { Store } from "@ngrx/store";
+import { AuthActions } from "../store/auth/auth.actions";
 
 @Injectable({providedIn: 'root'})
 
 export class AuthService{
 
-    private _authAlumno$ = new BehaviorSubject<Alumnos | null>(null)
-    public authAlumno$ = this._authAlumno$.asObservable()
-
     constructor(
         private notifier : NotifierService, 
         private router: Router, 
         private httpCliente : HttpClient,
+        private store : Store
         ){}
 
 
     isAuthenticated(): Observable<boolean>{
-        // return this.authAlumno$.pipe(
-        //     take(1),
-        //     map((alumno) => alumno ? true : false))
 
         return this.httpCliente.get<Alumnos[]>('http://localhost:3000/users', {
             params: {
@@ -31,6 +28,11 @@ export class AuthService{
             }
         }).pipe(
             map((alumResult) => {
+
+                if(alumResult.length){
+                    const authAlumn = alumResult[0];
+                    this.store.dispatch(AuthActions.setAuthAlumno({data : authAlumn}))
+                }
                 return !!alumResult.length
             })
         )
@@ -39,22 +41,6 @@ export class AuthService{
 
 
     login(loginData: LoginData) : void {
-        // const MOCK_ALUM : Alumnos = {
-        //     id: 20,
-        //     name: 'Mockname',
-        //     lastname: 'MockLast',
-        //     email : 'mock@email.com',
-        //     curso: 'none',
-        //     password: '123'
-        // }
-
-        // if ( loginData.email === MOCK_ALUM.email && loginData.password === MOCK_ALUM.password){
-        //     this._authAlumno$.next(MOCK_ALUM)
-        //     this.router.navigate(['/dashboard'])
-        // }else {
-        //     this.notifier.showError('Email o contraseña invalidos')
-        //     this._authAlumno$.next(null)
-        // }
 
         this.httpCliente.get<Alumnos[]>('http://localhost:3000/users', {
             params: {
@@ -65,12 +51,11 @@ export class AuthService{
             next: (response)=>{
                 if(response.length){
                     const authAlum = response[0]
-                    this._authAlumno$.next(authAlum);
+                    this.store.dispatch(AuthActions.setAuthAlumno({data : authAlum}))
                     this.router.navigate(['/dashboard']);
                     localStorage.setItem('token', authAlum.token)
                 }else{
                     this.notifier.showError('Email o contraseña invalidas');
-                    this._authAlumno$.next(null)
                 }
             },
             error: (err)=>{
@@ -81,6 +66,11 @@ export class AuthService{
                 }
             }
         })
+    }
+
+    public logout():void{
+        this.store.dispatch(AuthActions.setAuthAlumno({data : null}))
+
     }
 
 }

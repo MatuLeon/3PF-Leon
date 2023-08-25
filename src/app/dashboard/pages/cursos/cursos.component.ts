@@ -4,6 +4,9 @@ import { CursosService } from './cursos.service';
 import { Observable } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { CursosFormDialogComponent } from './cursos-form-dialog/cursos-form-dialog/cursos-form-dialog.component';
+import { Store } from '@ngrx/store';
+import { CursosActions } from './store/cursos.actions';
+import { selectCursosArray, selectCursosState } from './store/cursos.selectors';
 
 
 @Component({
@@ -12,29 +15,21 @@ import { CursosFormDialogComponent } from './cursos-form-dialog/cursos-form-dial
 })
 export class CursosComponent implements OnInit{
 
-  // public dataSource: CursosData[] = [];
-
-  public data$: Observable<CursosData[]>;
+  cursos$: Observable<CursosData[]>
 
   public displayedColumns = ['id', 'name', 'description', 'price', 'actions']
 
   constructor
   (private cursoService: CursosService, 
-  private matDialog: MatDialog
-  )
-    
-    {
-    this.data$ = this.cursoService.getCursos()
+  private matDialog: MatDialog,
+  private store: Store
+  ){
+    this.cursos$ = this.store.select(selectCursosArray)
   }
 
+
   ngOnInit(): void {
-    this.cursoService.loadCursos();
-
-    // this.cursoService.getCursos().subscribe({
-    //   next: (data) => console.log('DATA: ' , data)
-    // });
-
-
+    this.store.dispatch(CursosActions.loadCursoss())
   }
   
   onCreate():void{
@@ -56,7 +51,7 @@ export class CursosComponent implements OnInit{
             description: v.description,
             price: v.price,
           })
-        }else console.log('Se cancelo')
+        }
       }
     })
   }

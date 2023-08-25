@@ -40,23 +40,6 @@ export class CursosService {
   getCursos(): Observable<CursosData[]> {
     return this.cursos$;
   };
-
-  // createCurso():void{
-  //   this.cursos$.pipe(take(1)).subscribe({
-  //     next: (arrayActual) =>{
-  //       this.cursos$.next([
-  //         ...arrayActual,
-  //         {
-  //           id: arrayActual.length + 1,
-  //           name: 'Random',
-  //           description: 'Random',
-  //           price: 111
-  //         }
-  //       ])
-  //     }
-  //   })
-  // }
-
   createCurso( curso : CreateCursoData) : void{
     this.cursos$.pipe(take(1)).subscribe({
       next: (cursosActuales)=>{

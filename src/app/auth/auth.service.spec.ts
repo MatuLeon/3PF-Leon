@@ -16,10 +16,6 @@ describe ('AuthService', ()=>{
         TestBed.configureTestingModule({
             imports: [HttpClientTestingModule, RouterTestingModule],
             providers: [
-                // {
-                //     provide: Router,
-                //     useClass: RouterMock
-                // }
                 MockProvider(Router)
             ]
         })
@@ -53,11 +49,5 @@ describe ('AuthService', ()=>{
             url: `http://localhost:3000/users?email=${mockUser.email}&password=${mockUser.password}`
         }).flush(mockResponse)
 
-        service.authAlumno$.subscribe({
-            next: (AuthAlum) =>{
-                expect(AuthAlum).toBeTruthy();
-                expect(AuthAlum).toEqual(mockUser)
-            }
-        })
     })
 })
