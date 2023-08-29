@@ -28,7 +28,7 @@
     <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef appResaltado="#5C9EAD">Acciones </th>
         <td mat-cell *matCellDef="let cursos">
-            <button (click)="onDelete(cursos.id)" mat-icon-button color="warn">
+            <button [disabled]="!(isAdmin$ | async)"  (click)="onDelete(cursos.id)" mat-icon-button color="warn">
                 <mat-icon>
                     delete
                 </mat-icon>

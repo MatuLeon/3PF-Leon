@@ -49,6 +49,7 @@ export class UsersComponent {
               email: v.email,
               password: v.password,
               curso : v.nota,
+              role: v.role
             });
         }
       }})

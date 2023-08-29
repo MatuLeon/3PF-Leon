@@ -7,8 +7,19 @@
         "curso": "Angular",
         "password": "123",
         "token": "asdasdsad2ew5dsd15s15dsf1s5df",
+        "role": "ADMINISTRADOR",
         "id": 1
-    }
+    },
+    {
+      "name": "Pepe",
+      "lastname": "Dominguez",
+      "email" : "pd@hotmail.com",
+      "curso": "React",
+      "password": "456",
+      "token": "asdf15ds6fs63sas13gtyhui",
+      "role":"USUARIO",
+      "id": 2
+  }
   ],
   "cursos": [
     {

@@ -5,7 +5,8 @@ export interface Alumnos {
     curso : string ,
     email : string,
     password : string,
-    token: string
+    token: string;
+    role: 'ADMINISTRADOR' | 'USUARIO'
 }
 
 export interface CreateAlumnoData{
@@ -13,7 +14,8 @@ export interface CreateAlumnoData{
     lastname : string,
     curso : string ,
     email : string,
-    password : string
+    password : string,
+    role: string,
 }
 
 export interface UpdateAlumnoData{
@@ -21,5 +23,7 @@ export interface UpdateAlumnoData{
     lastname? : string,
     curso? : string ,
     email?: string,
-    password? : string
+    password? : string,
+    role?: string,
+    token?: string,
 }

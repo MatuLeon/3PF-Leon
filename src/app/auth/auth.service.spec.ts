@@ -33,7 +33,8 @@ describe ('AuthService', ()=>{
             curso: 'Algo hace',
             name: 'Fake',
             lastname: 'Fakex2',
-            token: 'asdasdasd132'
+            token: 'asdasdasd132',
+            role: 'ADMINISTRADOR'
         }
 
         const mockResponse: Alumnos[] = [ mockUser]

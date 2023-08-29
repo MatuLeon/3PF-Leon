@@ -13,6 +13,7 @@ import { ErrorMessagesPipe } from './pipes/error-messages.pipe';
 import { ResaltadoDirective } from './directives/resaltado.directive';
 import { RepetirDirective } from './directives/repetir.directive';
 import { ResaltarNotaDirective } from './directives/resaltar-nota.directive';
+import { MatSelectModule } from '@angular/material/select'
 
 
 
@@ -43,7 +44,8 @@ import { ResaltarNotaDirective } from './directives/resaltar-nota.directive';
     ErrorMessagesPipe,
     ResaltadoDirective,
     RepetirDirective,
-    ResaltarNotaDirective
+    ResaltarNotaDirective,
+    MatSelectModule
   ]
 })
 export class SharedModule { }

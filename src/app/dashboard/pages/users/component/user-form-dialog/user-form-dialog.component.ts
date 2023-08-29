@@ -30,6 +30,7 @@ export class UserFormDialogComponent {
   cursoControl = new FormControl<string | null>(null, [
     Validators.required
   ]);
+  roleControl = new FormControl<string | null>(null, Validators.required)
 
   userForm = new FormGroup({
     id : this.idControl,
@@ -38,6 +39,7 @@ export class UserFormDialogComponent {
     email : this.emailControl,
     password : this.passwordControl,
     curso : this.cursoControl,
+    role : this.roleControl,
   })
   
     constructor(
@@ -52,13 +54,24 @@ export class UserFormDialogComponent {
           this.emailControl.setValue(this.data.email);
           this.cursoControl.setValue(this.data.curso);
           this.passwordControl.setValue(this.data.password)
-
+          this.roleControl.setValue(this.data.role)
         }
       }
 
   onSubmit(): void {
     if(this.userForm.invalid){
       this.userForm.markAllAsTouched()
-    }else this.dialogRef.close(this.userForm.value)
+    }else {
+
+      const payload: any = {
+        ...this.userForm.value
+      }
+
+      if (this.editingAlumno){
+        payload['token'] = this.editingAlumno.token
+      }
+
+      this.dialogRef.close(payload)
+    }
   }
 }

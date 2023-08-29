@@ -71,13 +71,6 @@ export class UserService {
 
 
   updateAlumnoByID (id: number, alumnoActualizado : UpdateAlumnoData):void{
-    // this.alumnos$.pipe(take(1)).subscribe({
-    //   next: (idActual) =>{
-    //     this._alumnos$.next(
-    //       idActual.map((a) => a.id === id ? {...a, ...alumnoActualizado} : a)
-    //     );
-    //   }
-    // })
 
     this.httpCliente.put(environment.baseApiUrl + '/users/' + id, alumnoActualizado)
     .subscribe({
