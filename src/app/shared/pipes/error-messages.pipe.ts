@@ -11,8 +11,6 @@ export class ErrorMessagesPipe implements PipeTransform {
       required : 'Este campo es obligatorio',
       email : 'Email no valido'
     }
-
-    console.log(error)
     return errorMessages[error.key] || 'Campo invalido';
   }
 

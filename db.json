@@ -19,7 +19,17 @@
       "token": "asdf15ds6fs63sas13gtyhui",
       "role":"USUARIO",
       "id": 2
-  }
+  },
+  {
+    "name": "Maria",
+    "lastname": "Solange",
+    "email" : "ms@hotmail.com",
+    "curso": "React",
+    "password": "111",
+    "token": "asdf15ds6fs63sas13g5ss28hui",
+    "role":"USUARIO",
+    "id": 3
+}
   ],
   "cursos": [
     {
@@ -41,5 +51,22 @@
       "price": 655
   }
   ],
-  "profesores": []
+  "profesores": [],
+  "subscription": [
+    {
+      "id": 1,
+      "cursoId": 2,
+      "usersId": 2
+    },
+    {
+      "id": 2,
+      "cursoId": 1,
+      "usersId": 3
+    },
+    {
+      "id": 3,
+      "cursoId": 3,
+      "usersId": 1
+    }
+  ]
 }

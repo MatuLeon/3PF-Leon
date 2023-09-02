@@ -13,7 +13,7 @@ import { environment } from 'src/environments/environment.prod';
 export class UserService {
   private sendNotification$ = new Subject<string>();
   private _alumnos$ = new BehaviorSubject<Alumnos[]>([]);
-  private alumnos$ = this._alumnos$.asObservable()
+  public alumnos$ = this._alumnos$.asObservable()
 
   constructor(private notifier : NotifierService, private httpCliente : HttpClient, private http : HttpClient) { 
     this.sendNotification$.subscribe({

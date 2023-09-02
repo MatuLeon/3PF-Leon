@@ -1,6 +1,5 @@
 import { NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
-import { ProfesoresModule } from "./pages/profesores/profesores.module";
 import { HomeComponent } from "./pages/home/home.component";
 import { adminGuard } from "../core/guards/admin.guard";
 
@@ -25,8 +24,8 @@ import { adminGuard } from "../core/guards/admin.guard";
             loadChildren: ()=>import('./pages/profesores/profesores.module').then((m)=>m.ProfesoresModule)
         },
         {
-            path: 'counter',
-            loadChildren: ()=>import('./pages/counter/counter.module').then((m)=>m.CounterModule)
+            path: 'subscription',
+            loadChildren: ()=>import('./pages/subscription/subscription.module').then((m)=>m.SubscriptionModule)
         },
         {
             path: '**',

@@ -12,6 +12,8 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { RouterModule } from '@angular/router';
 import { CursosModule } from './pages/cursos/cursos.module';
 import { HomeModule } from './pages/home/home.module';
+import { SubscriptionModule } from './pages/subscription/subscription.module';
+
 
 
 
@@ -21,7 +23,7 @@ import { HomeModule } from './pages/home/home.module';
   declarations: [
     DashboardComponent,
     NavMenuComponent,
-    ToolbarComponent
+    ToolbarComponent,
   ],
   imports: [
     UsersModule,
@@ -33,7 +35,8 @@ import { HomeModule } from './pages/home/home.module';
     SharedModule,
     MatListModule,
     CursosModule,
-    HomeModule
+    HomeModule,
+    SubscriptionModule
   ],
   exports:[
     DashboardComponent,

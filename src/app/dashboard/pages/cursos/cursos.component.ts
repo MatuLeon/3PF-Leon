@@ -6,7 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CursosFormDialogComponent } from './cursos-form-dialog/cursos-form-dialog/cursos-form-dialog.component';
 import { Store } from '@ngrx/store';
 import { CursosActions } from './store/cursos.actions';
-import { selectCursosArray, selectCursosState } from './store/cursos.selectors';
+import { selectCursosArray } from './store/cursos.selectors';
 import { selectIsAdmin } from 'src/app/store/auth/auth.selectors';
 
 
@@ -20,6 +20,7 @@ export class CursosComponent implements OnInit{
 
   public displayedColumns = ['id', 'name', 'description', 'price', 'actions'];
   public isAdmin$ : Observable<boolean>;
+  
   constructor
   (private cursoService: CursosService, 
   private matDialog: MatDialog,
