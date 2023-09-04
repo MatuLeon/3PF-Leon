@@ -25,6 +25,7 @@ import { adminGuard } from "../core/guards/admin.guard";
         },
         {
             path: 'subscription',
+            canActivate: [adminGuard],
             loadChildren: ()=>import('./pages/subscription/subscription.module').then((m)=>m.SubscriptionModule)
         },
         {

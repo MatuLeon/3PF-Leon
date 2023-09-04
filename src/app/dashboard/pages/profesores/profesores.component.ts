@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { ProfesoresService } from './profesores.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ProfesoresFormDialogComponent } from './profesores-form-dialog/profesores-form-dialog.component';
+import { Store } from '@ngrx/store';
+import { selectIsAdmin } from 'src/app/store/auth/auth.selectors';
 
 @Component({
   selector: 'app-profesores',
@@ -14,14 +16,17 @@ export class ProfesoresComponent implements OnInit{
   
   public data$: Observable<DataProfesor[]>;
 
-  public displayedColumns = ['id', 'materia', 'name' , 'titulo', 'actions']
+  public displayedColumns = ['id', 'materia', 'name' , 'titulo', 'actions'];
+  public isAdmin$ : Observable<boolean>
 
 
   constructor(private profeService: ProfesoresService,
-    private matDialog: MatDialog)
+    private matDialog: MatDialog,
+    private store: Store)
     
     {
       this.data$ = this.profeService.getProfes()
+      this.isAdmin$ = this.store.select(selectIsAdmin)
     }
 
     ngOnInit(): void {

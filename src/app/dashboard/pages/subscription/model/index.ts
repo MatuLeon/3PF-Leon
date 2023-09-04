@@ -12,3 +12,8 @@ export interface SuscriptionWithCursoAndAlum extends Suscripcion{
     curso: CursosData;
     alumno: Alumnos;
 }
+
+export interface CreateSuscripcion{
+    alumnoId: number | null;
+    cursoId: number | null;
+}

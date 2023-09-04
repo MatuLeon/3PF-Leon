@@ -21,7 +21,7 @@ export class AlumnosDetailComponent implements OnInit {
   ngOnInit():void{
     this.userService.getAlumnoByID(this.activatedRoute.snapshot.params['id'])
     .subscribe({
-      next: (alum)=> console.log(this.alumno = alum)
+      next: (alumno)=> console.log(this.alumno = alumno)
     })
   }
 }

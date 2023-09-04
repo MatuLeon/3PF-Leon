@@ -6,6 +6,7 @@ import { SuscriptionWithCursoAndAlum } from './model';
 import { SelectCurso } from './store/suscription.selectors';
 import { MatDialog } from '@angular/material/dialog';
 import { SuscriptionDialogComponent } from './component/suscription/suscription-dialog.component';
+import { selectIsAdmin } from 'src/app/store/auth/auth.selectors';
 
 @Component({
   selector: 'app-subscription',

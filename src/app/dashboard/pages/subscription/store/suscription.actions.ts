@@ -1,5 +1,5 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-import { SuscriptionWithCursoAndAlum } from '../model';
+import { CreateSuscripcion, Suscripcion, SuscriptionWithCursoAndAlum } from '../model';
 import { HttpErrorResponse } from '@angular/common/http';
 import { CursosData } from '../../cursos/model';
 import { Alumnos } from '../../users/model';
@@ -18,5 +18,11 @@ export const SuscriptionActions = createActionGroup({
     'Load Alumno Options': emptyProps(),
     'Load Alumno Option Success': props<{data: Alumnos[]}>(),
     'Load Alumno Option Failure': props<{ error: HttpErrorResponse }>(),
+
+    'Create Suscripcion' :props<{ payload: CreateSuscripcion}>(),
+    'Create Suscripcion Success' :props<{ data: Suscripcion}>(),
+    'Create Suscripcion Failure' :props<{ error: HttpErrorResponse}>()
+
+
   }
 });

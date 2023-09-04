@@ -3,7 +3,7 @@
     <a *ngIf="selectIsAdmin$ |async"  routerLink="users" mat-list-item>Usuarios</a>
     <a routerLink="cursos" mat-list-item>Cursos</a>
     <a routerLink="profesores" mat-list-item>Profesores</a>
-    <a routerLink="subscription" mat-list-item>Suscripciones</a>
+    <a *ngIf="selectIsAdmin$ |async" routerLink="subscription" mat-list-item>Suscripciones</a>
 
     <a (click)="logout()" mat-list-item>Cerrar Sesión</a>
 </mat-nav-list>

@@ -16,7 +16,7 @@ export class CursosFormDialogComponent {
   idControl = new FormControl<number | null>(null);
   nameControl = new FormControl <string | null>(null, [Validators.required]);
   descriptionControl = new FormControl <string | null> (null, [Validators.required]);
-  priceControl = new FormControl <number|null> (null,[Validators.required, Validators.pattern((/^[1-9]\d{6,10}$/))]);
+  priceControl = new FormControl <number|null> (null,[Validators.required]);
 
   cursoForm = new FormGroup({
     id : this.idControl,
