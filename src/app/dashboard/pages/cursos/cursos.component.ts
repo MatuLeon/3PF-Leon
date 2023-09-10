@@ -35,12 +35,40 @@ export class CursosComponent implements OnInit{
     this.store.dispatch(CursosActions.loadCursoss())
   }
   
-  onCreate():void{
-    this.matDialog.open(CursosFormDialogComponent)
+  onCreateCurso():void{
+    const dialogRef = this.matDialog.open(CursosFormDialogComponent)
+    dialogRef.afterClosed()
+    .subscribe({
+      next: (newCurso)=>{
+        if(newCurso){
+          this.store.dispatch(CursosActions.createCursos({payload: newCurso.getRawValue()}))
+        }
+      }
+    })
   }
 
-  onDelete(id: number):void{
-    this.cursoService.deleteById(id)
+
+  editCurso(cursoEdit: CursosData): void {
+    const dialogRef = this.matDialog.open(CursosFormDialogComponent, {
+      data: cursoEdit
+    });
+
+    dialogRef.afterClosed()
+    .subscribe({
+      next: (cursoUpdated)=>{
+        if(cursoUpdated){
+          this.store.dispatch(CursosActions.editCursos({ payload: {...cursoUpdated.getRawValue(), id: cursoEdit.id}}))
+        }
+      }
+    })
+  };
+
+
+
+  deleteCurso(cursoDelete: CursosData): void {
+    if(confirm('¿Quiere eliminar el curso?')){
+      this.store.dispatch(CursosActions.deleteCursos({payload: cursoDelete}))
+    }
   }
 
   agregarCurso():void{
